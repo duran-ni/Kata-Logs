@@ -28,7 +28,7 @@ public class LogLine {
             case "FTL":
                 return LogLevel.FATAL;
             default:
-                return null;
+                return LogLevel.UNKNOWN;
         }
     }
 
