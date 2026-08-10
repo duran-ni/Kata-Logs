@@ -32,6 +32,14 @@ public class LogLine {
         }
     }
 
+    // Genera el formato corto "[<ENCODED_LEVEL>]:<MESSAGE>" para
+    // reducir el espacio de almacenamiento de las líneas de log.
+    public String getOutputForShortLog() {
+        int encodedLevel = getLogLevel().getEncodedLevel();
+        String message = extractMessage();
+        return encodedLevel + ":" + message;
+    }
+
     // Método auxiliar privado: aísla la lógica de extracción del
     // corchete inicial para no repetirla en otros métodos.
     private String extractShortLevel() {
@@ -39,4 +47,13 @@ public class LogLine {
         int end = rawLogLine.indexOf(']');
         return rawLogLine.substring(start, end);
     }
+
+    // Extrae el mensaje, es decir, todo lo que va después de "]: ".
+    private String extractMessage() {
+        int messageStart = rawLogLine.indexOf(']') + 3;
+        return rawLogLine.substring(messageStart);
+    }
+
 }
+
+
